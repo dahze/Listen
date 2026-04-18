@@ -31,8 +31,8 @@ class ListenApp extends StatelessWidget {
           '/login': (_) => const LoginPage(),
           '/register': (_) => const RegisterPage(),
           '/home': (_) => const HomePage(),
-          '/split-screen': (_) => const SplitScreenPage(),
-          '/history': (_) => const HistoryPage(),
+          //'/split-screen': (_) => const SplitScreenPage(),
+          //'/history': (_) => const HistoryPage(),
         },
       ),
     );

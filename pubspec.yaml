@@ -25,7 +25,7 @@ dependencies:
   cloud_firestore: ^5.2.1
 
   # Speech
-  speech_to_text: ^6.6.2
+  speech_to_text: ^7.0.0
 
   # Translation
   http: ^1.2.1

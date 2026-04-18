@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "755877635995",
+    "project_id": "listen-4d6d5",
+    "storage_bucket": "listen-4d6d5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755877635995:android:5abf16de7abceb2d83633e",
+        "android_client_info": {
+          "package_name": "com.example.listen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Bt44U8-JjLygHBqVUnAAkrqVy4iBbHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
