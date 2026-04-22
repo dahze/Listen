@@ -6,11 +6,18 @@ import 'package:listen/features/auth/data/datasources/auth_firebase_datasource.d
 import 'package:listen/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:listen/features/auth/domain/repositories/auth_repository.dart';
 import 'package:listen/features/auth/domain/usecases/get_current_user.dart';
+import 'package:listen/features/auth/domain/usecases/reset_password.dart';
 import 'package:listen/features/auth/domain/usecases/sign_in.dart';
 import 'package:listen/features/auth/domain/usecases/sign_out.dart';
 import 'package:listen/features/auth/domain/usecases/sign_up.dart';
-import 'package:listen/features/auth/domain/usecases/reset_password.dart';
 import 'package:listen/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:listen/features/speech/data/datasources/speech_datasource.dart';
+import 'package:listen/features/speech/data/repositories/speech_repository_impl.dart';
+import 'package:listen/features/speech/domain/repositories/speech_repository.dart';
+import 'package:listen/features/speech/domain/usecases/listen_speech.dart';
+import 'package:listen/features/speech/domain/usecases/request_permission.dart';
+import 'package:listen/features/speech/domain/usecases/stop_listening.dart';
+import 'package:listen/features/speech/presentation/bloc/speech_bloc.dart';
 import 'package:listen/features/translation/data/datasources/translation_remote_datasource.dart';
 import 'package:listen/features/translation/data/repositories/translation_repository_impl.dart';
 import 'package:listen/features/translation/domain/repositories/translation_repository.dart';
@@ -54,4 +61,18 @@ Future<void> configureDependencies() async {
   );
   sl.registerLazySingleton(() => TranslateText(sl()));
   sl.registerFactory(() => TranslationBloc(translateText: sl()));
+
+  // ─── Speech ────────────────────────────────────────────────────────────────
+  sl.registerLazySingleton<SpeechDatasource>(() => SpeechDatasourceImpl());
+  sl.registerLazySingleton<SpeechRepository>(() => SpeechRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => ListenSpeech(sl()));
+  sl.registerLazySingleton(() => StopListening(sl()));
+  sl.registerLazySingleton(() => RequestPermission(sl()));
+  sl.registerFactory(
+    () => SpeechBloc(
+      listenSpeech: sl(),
+      stopListening: sl(),
+      requestPermission: sl(),
+    ),
+  );
 }
