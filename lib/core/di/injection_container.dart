@@ -11,6 +11,14 @@ import 'package:listen/features/auth/domain/usecases/sign_in.dart';
 import 'package:listen/features/auth/domain/usecases/sign_out.dart';
 import 'package:listen/features/auth/domain/usecases/sign_up.dart';
 import 'package:listen/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:listen/features/conversation/data/datasources/conversation_firebase_datasource.dart';
+import 'package:listen/features/conversation/data/repositories/conversation_repository_impl.dart';
+import 'package:listen/features/conversation/domain/repositories/conversation_repository.dart';
+import 'package:listen/features/conversation/domain/usecases/add_message.dart';
+import 'package:listen/features/conversation/domain/usecases/create_session.dart';
+import 'package:listen/features/conversation/domain/usecases/delete_session.dart';
+import 'package:listen/features/conversation/domain/usecases/end_session.dart';
+import 'package:listen/features/conversation/domain/usecases/get_sessions.dart';
 import 'package:listen/features/speech/data/datasources/speech_datasource.dart';
 import 'package:listen/features/speech/data/repositories/speech_repository_impl.dart';
 import 'package:listen/features/speech/domain/repositories/speech_repository.dart';
@@ -75,4 +83,17 @@ Future<void> configureDependencies() async {
       requestPermission: sl(),
     ),
   );
+
+  // ─── Conversation ──────────────────────────────────────────────────────────
+  sl.registerLazySingleton<ConversationFirebaseDatasource>(
+    () => ConversationFirebaseDatasourceImpl(sl()),
+  );
+  sl.registerLazySingleton<ConversationRepository>(
+    () => ConversationRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton(() => CreateSession(sl()));
+  sl.registerLazySingleton(() => AddMessage(sl()));
+  sl.registerLazySingleton(() => GetSessions(sl()));
+  sl.registerLazySingleton(() => DeleteSession(sl()));
+  sl.registerLazySingleton(() => EndSession(sl()));
 }
