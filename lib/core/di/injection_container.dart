@@ -11,6 +11,7 @@ import 'package:listen/features/auth/domain/usecases/sign_in.dart';
 import 'package:listen/features/auth/domain/usecases/sign_out.dart';
 import 'package:listen/features/auth/domain/usecases/sign_up.dart';
 import 'package:listen/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:listen/features/history/presentation/bloc/history_bloc.dart';
 import 'package:listen/features/conversation/data/datasources/conversation_firebase_datasource.dart';
 import 'package:listen/features/conversation/data/repositories/conversation_repository_impl.dart';
 import 'package:listen/features/conversation/domain/repositories/conversation_repository.dart';
@@ -96,4 +97,7 @@ Future<void> configureDependencies() async {
   sl.registerLazySingleton(() => GetSessions(sl()));
   sl.registerLazySingleton(() => DeleteSession(sl()));
   sl.registerLazySingleton(() => EndSession(sl()));
+
+  // ─── History ────────────────────────────────────────────────────────────────
+  sl.registerFactory(() => HistoryBloc(getSessions: sl(), deleteSession: sl()));
 }
